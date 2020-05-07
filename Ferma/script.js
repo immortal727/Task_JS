@@ -182,13 +182,13 @@ class Farm {
                 this._animals._animals.splice(index, 1);
             } else if (this._animals.length < 10) {
                 // Рождение нового животного             
-                this._animals.addAnimal(randomAnimal(_homeanimal));
+                this.addAnimal(randomAnimal(this._homeanimal));
             }
         }
     }
     
     getInfo() {
-        for (let oneAnimal of this._animals.length) {
+        for (let oneAnimal of this._animals) {
             // Если фермер жив 
             if (this._fermer._resource > 0) console.log(oneAnimal);
         }
@@ -197,8 +197,8 @@ class Farm {
 
 function randomAnimal(array) {
     let length = array.length;
-    let index = randomInteger(0, length);
-    return new array[index]()
+    let index = randomInteger(0, length-1);
+    return new array[index]();
 }
 
 function randomInteger(min, max) {
@@ -210,10 +210,10 @@ function randomInteger(min, max) {
 }
 let fermer = new Fermer("Дмитрий");
 let animal = new Farm();
-animal.addAnimal(new (Cat));
-animal.addAnimal(new (Rabbit));
-animal.addAnimal(new (Cow));
-animal.addAnimal(new (Hen));
+animal.addAnimal(new Cat());
+animal.addAnimal(new Rabbit());
+animal.addAnimal(new Cow());
+animal.addAnimal(new Hen());
 
 
 let wild_Animal = new wildAnimal("Дикое животное");
