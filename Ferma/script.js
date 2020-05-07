@@ -216,11 +216,13 @@ animal.addAnimal(new Cat());
 animal.addAnimal(new Rabbit());
 animal.addAnimal(new Cow());
 animal.addAnimal(new Hen());
-
-
 let wild = new wildAnimal("Дикое животное");
-wild.addAnimal(); // Создаем диких животных рандомно,
+// Создаем диких животных рандомно,
 // на выходе должны получить массив wild_Animal._wildAnimals
+wild.addAnimal(new Wolf());
+wild.addAnimal(new Bear());
+wild.addAnimal(new Fox());
+wild.addAnimal();
 let farm = new Farm(fermer, animal);
 for (let i = 0; i < 5; i++) {
     farm.passDay(wild._wildAnimals);
