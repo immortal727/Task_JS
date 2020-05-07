@@ -49,6 +49,9 @@ class Animals {
     _health = this._weight; // здоровье (из рассчета 1 кг животного 1 ресурс)
     _sourceAnimal = 3; // кол-во ресурсов
     _edible = true; // съедобно/несъедобно
+    constructor(name) {
+        this._nameAnimal = name;
+    }
     set source(sourceAnimalValue) {
         if (sourceAnimalValue < 0) {
             throw new Error("Здоровье животного не может быть меньше 0");
@@ -59,10 +62,7 @@ class Animals {
         return this._sourceAnimal;
     }
 
-    constructor(name) {
-       this._nameAnimal = name;
-       
-    }
+   
     escape(otherAnimal){ // Животное убежало
         if (!(otherAnimal instanceof Animals) || otherAnimal._speed < this._speed) {
             _health--; // Было совершено нападение, а значит отнимаем 1-ку здоровья
@@ -157,9 +157,8 @@ class Fox extends wildAnimal {
     _weight = 30;
 }
 
-
 class Farm {
-    
+    _homeanimal = [Cow, Rabbit, Hen, Cat];
     constructor(fermer, ...animals) {
         this._animals = animals;
         this._age = 1; // День на ферме 
@@ -168,6 +167,7 @@ class Farm {
     addAnimal(animal) {
         this._animals.push(animal);
     }
+
     passDay() {
         this._age += 1;
         // Фермер тратит две единицы ресурсов
@@ -176,14 +176,13 @@ class Farm {
             console.log("Игра закончилась");
         }
 
-        let homeanimal = [Cow, Rabbit, Hen, Cat];
         for (let index of this._animals) { // Создаем массив из 10 элементов 
             // Если здоровье животного 0, удаляем из массива 
             if (this._animals._health === 0) {
                 this._animals._animals.splice(index, 1);
             } else if (this._animals.length < 10) {
                 // Рождение нового животного             
-                this._animals.addAnimal(randomAnimal(homeanimal));
+                this._animals.addAnimal(randomAnimal(_homeanimal));
             }
         }
     }
@@ -210,8 +209,15 @@ function randomInteger(min, max) {
     return Math.floor(rand);
 }
 let fermer = new Fermer("Дмитрий");
-let animal = new Animals("Домашнее животное")
-let farm = new Farm(fermer, animal);
+let animal = new Farm();
+animal.addAnimal(new (Cat));
+animal.addAnimal(new (Rabbit));
+animal.addAnimal(new (Cow));
+animal.addAnimal(new (Hen));
+
+
+let wild_Animal = new wildAnimal("Дикое животное");
+let farm = new Farm(fermer, wildAnimal, animal);
 for (let i = 0; i < 5; i++) {
     farm.passDay();
 }
