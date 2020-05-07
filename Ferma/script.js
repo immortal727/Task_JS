@@ -171,8 +171,8 @@ class Farm {
     passDay() {
         this._age += 1;
         // Фермер тратит две единицы ресурсов
-        this._fermer._resource = this._fermer._resource - 2;
-        if (this._fermer._resource === 0) {
+        this._resource = this._resource - 2;
+        if (this._resource === 0) {
             console.log("Игра закончилась");
         }
         //console.log(this._animals.length);
@@ -211,7 +211,7 @@ function randomInteger(min, max) {
     return Math.floor(rand);
 }
 
-let farm = new Farm(Animals, wildAnimal);
+let farm = new Farm();
 for (let i = 0; i < 5; i++) {
     farm.passDay();
 }
