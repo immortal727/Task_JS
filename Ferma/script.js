@@ -195,8 +195,6 @@ class Farm {
     }
 }
 
-let fermer1 = new Fermer("Дмитрий");
-
 function randomAnimal(array) {
     let length = array.length;
     let index = randomInteger(0, length);
@@ -210,7 +208,7 @@ function randomInteger(min, max) {
     let rand = min + Math.random() * (max + 1 - min);
     return Math.floor(rand);
 }
-
+let fermer = new Fermer("Дмитрий");
 let farm = new Farm();
 for (let i = 0; i < 5; i++) {
     farm.passDay();
