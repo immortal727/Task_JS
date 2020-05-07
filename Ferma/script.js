@@ -159,7 +159,7 @@ class Fox extends wildAnimal {
 
 
 class Farm {
-    _homeanimal = [Cow, Rabbit, Hen, Cat];
+    
     constructor(fermer, ...animals) {
         this._animals = animals;
         this._age = 1; // День на ферме 
@@ -175,14 +175,15 @@ class Farm {
         if (this._resource === 0) {
             console.log("Игра закончилась");
         }
-        //console.log(this._animals.length);
+
+        let homeanimal = [Cow, Rabbit, Hen, Cat];
         for (let index of this._animals) { // Создаем массив из 10 элементов 
             // Если здоровье животного 0, удаляем из массива 
             if (this._animals._health === 0) {
                 this._animals._animals.splice(index, 1);
             } else if (this._animals.length < 10) {
                 // Рождение нового животного             
-                this._animals.addAnimal(randomAnimal(_homeanimal));
+                this._animals.addAnimal(randomAnimal(homeanimal));
             }
         }
     }
