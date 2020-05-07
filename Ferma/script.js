@@ -78,7 +78,6 @@ class Animals {
             this._health++; // Животное восполняет здоровье
         }
     }
-    
 }
 
 class Cow extends Animals{ // Корова
@@ -117,13 +116,13 @@ class wildAnimal extends Animals { // дикое животное
     _speed = 5; // скорость
     _attack = randomInteger(0, 1);
     _power = 3; // сила
-    _wildAnimalArray = [Wolf, Bear, Fox];
     constructor(name) {
         super(name);
         this._wildAnimals = [];
+        this._wildAnimalArray = [Wolf, Bear, Fox];
     }
     attack(otherAnimal) {
-        if (!(otherAnimal instanceof Animals)) {
+        if (otherAnimal instanceof wildAnimal) {
             throw new Error("Дикие животные не могут нападать друг на друга");
         } else if (this._attack === 1) {
             this._kill = true; // дикое животное убило домашнее
@@ -136,7 +135,7 @@ class wildAnimal extends Animals { // дикое животное
         for (let index of this._wildAnimals) { // Создаем массив из 5 элементов 
             if (this._wildAnimals.length < 5) {
                 // Рандомное добавление дикого животного             
-                this._wildAnimalArray.push(randomAnimal(this.__wildAnimalArray));
+                this._wildAnimals.push(randomAnimal(this._wildAnimalArray));
             }
         }
     }
@@ -168,7 +167,10 @@ class Farm {
         this._animals.push(animal);
     }
 
-    passDay() {
+    passDay(wild) {
+        console.log(`Массив диких животных ${wild}`);
+      //  wild.addAnimal();
+        //console.log(_wildAnimals);
         this._age += 1;
         // Фермер тратит две единицы ресурсов
         this._resource = this._resource - 2;
@@ -216,10 +218,12 @@ animal.addAnimal(new Cow());
 animal.addAnimal(new Hen());
 
 
-let wild_Animal = new wildAnimal("Дикое животное");
-let farm = new Farm(fermer, wildAnimal, animal);
+let wild = new wildAnimal("Дикое животное");
+wild.addAnimal(); // Создаем диких животных рандомно,
+// на выходе должны получить массив wild_Animal._wildAnimals
+let farm = new Farm(fermer, animal);
 for (let i = 0; i < 5; i++) {
-    farm.passDay();
+    farm.passDay(wild._wildAnimals);
 }
 farm.getInfo();
 
