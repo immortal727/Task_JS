@@ -209,7 +209,8 @@ function randomInteger(min, max) {
     return Math.floor(rand);
 }
 let fermer = new Fermer("Дмитрий");
-let farm = new Farm();
+let animal = new Animals("Домашнее животное")
+let farm = new Farm(fermer, animal);
 for (let i = 0; i < 5; i++) {
     farm.passDay();
 }
