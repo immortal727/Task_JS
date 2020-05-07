@@ -167,9 +167,6 @@ class Farm {
     }
 
     passDay(wild) {
-        console.log("Массив диких животных", wild);
-      //  wild.addAnimal();
-        //console.log(_wildAnimals);
         this._age += 1;
         // Фермер тратит две единицы ресурсов
         this._resource = this._resource - 2;
@@ -210,15 +207,14 @@ function randomInteger(min, max) {
     return Math.floor(rand);
 }
 let fermer = new Fermer("Дмитрий");
-let animal = new Farm();
+let animal = new Farm(fermer);
 animal.addAnimal(new Cat());
 animal.addAnimal(new Rabbit());
 animal.addAnimal(new Cow());
 animal.addAnimal(new Hen());
 let wild = new wildAnimal("Дикое животное");
-// Создаем диких животных рандомно,
-// на выходе должны получить массив wild_Animal._wildAnimals
 wild.addAnimal();
+console.log("Массив диких животных",wild._wildAnimals)
 let farm = new Farm(fermer, animal);
 for (let i = 0; i < 5; i++) {
     farm.passDay(wild._wildAnimals);
