@@ -132,12 +132,11 @@ class wildAnimal extends Animals { // дикое животное
         }
     }
     addAnimal() {
-        for (let index of this._wildAnimals) { // Создаем массив из 5 элементов 
-            if (this._wildAnimals.length < 5) {
-                // Рандомное добавление дикого животного             
-                this._wildAnimals.push(randomAnimal(this._wildAnimalArray));
-            }
-        }
+       // Создаем массив из 5 элементов 
+       while (this._wildAnimals.length < 5) {
+            // Рандомное добавление дикого животного             
+            this._wildAnimals.push(randomAnimal(this._wildAnimalArray));
+       }
     }
 }
 
@@ -219,9 +218,6 @@ animal.addAnimal(new Hen());
 let wild = new wildAnimal("Дикое животное");
 // Создаем диких животных рандомно,
 // на выходе должны получить массив wild_Animal._wildAnimals
-wild.addAnimal(new Wolf());
-wild.addAnimal(new Bear());
-wild.addAnimal(new Fox());
 wild.addAnimal();
 let farm = new Farm(fermer, animal);
 for (let i = 0; i < 5; i++) {
