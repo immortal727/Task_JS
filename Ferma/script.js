@@ -135,7 +135,7 @@ class wildAnimal extends Animals { // дикое животное
        // Создаем массив из 5 элементов 
        while (this._wildAnimals.length < 5) {
             // Рандомное добавление дикого животного             
-            this._wildAnimals.push(randomAnimal(this._wildAnimalArray));
+           this._wildAnimals.push(randomAnimal(this._wildAnimalArray));
        }
     }
 }
@@ -167,7 +167,7 @@ class Farm {
     }
 
     passDay(wild) {
-        console.log(`Массив диких животных ${wild}`);
+        console.log("Массив диких животных", wild);
       //  wild.addAnimal();
         //console.log(_wildAnimals);
         this._age += 1;
