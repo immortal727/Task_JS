@@ -1,15 +1,16 @@
 ﻿class Fermer {
     _quantity = 10;
-    
+    _resource = 5; // Первоначальное значение единиц ресурсов фермера
     _prognal = false;
     constructor(name) {
         this._name = name; // имя фермера
-        this._resource = 5; // Первоначальное значение единиц ресурсов фермера
         this._driveAway = 0; // Счетчик диких животных, сколько смог прогнать фермер
     }
 
     collection(otherAnimal) { // Сбор ресурсов с животных
-        if ((otherAnimal instanceof Animals) || otherAnimal._sourceAnimal!=0) {
+      //  console.log(otherAnimal);
+      //  console.log(`Ресурс животного ${this.otherAnimal._name} = ${otherAnimal._sourceAnimal}`);
+        if (!(otherAnimal instanceof Animals) || otherAnimal._sourceAnimal!=0) {
             this._resource++; // Фермер восполняет свои ресурсы
             otherAnimal._sourceAnimal--; // Ресурсы животного уменьшаются на 1-ку
         }
@@ -18,11 +19,18 @@
     eat(otherAnimal) {
         if (!(otherAnimal instanceof Animals) && otherAnimal._edible === false) {
             throw new Error("Фермер не сможеть съесть другое животное");
-        } else if (this._resource === 0) {
-            this._resource += otherAnimal._sourceAnimal;
-            otherAnimal._health = 0;
+        } else {
+         //   console.log('Животные', otherAnimal);
+            for (let i = 0; i < otherAnimal.length; i++) {
+                consol.log(otherAnimal[i]);
+                if (otherAnimal._sourceAnimal === 0) {
+                    console.log(`Фермер съел ${otherAnimal[i]}`);
+                    otherAnimal._health = 0;
+                    _resource += otherAnimal._sourceAnimal; // ресурс фермера увеличивается
+                    return;
+                }
+            }
         }
-        else console.log(otherAnimal._nameAnimal, "нельзя съесть");
     }
 
     drive_away(otherAnimal) { // Фермер прогоняет другое животное
@@ -184,10 +192,7 @@ class Farm {
                 this.addAnimal(randomAnimal(this._homeanimal));
             }
         }
-        fermer.collection(animal); // Сбор ресурсов
-        fermer.drive_away(wild);// Прогоняет диких животных
-        fermer.feed(animal); // Фермер кормит животрных
-        fermer.eat(animal); // Фермер съедает животного у кторого не осталось ресурсов
+        
     }
     
     getInfo() {
@@ -221,9 +226,13 @@ let wild = new wildAnimal("Дикое животное");
 wild.addAnimal();
 console.log("Массив диких животных",wild._wildAnimals)
 let farm = new Farm(fermer, animal);
-for (let i = 0; i < 5; i++) {
+for (let i = 0; i < 1; i++) {
     farm.passDay(wild._wildAnimals);
     wild.attack(animal); // Приходит дикое животное 
+    fermer.collection(animal); // Сбор ресурсов
+    fermer.drive_away(wild);// Прогоняет диких животных
+    fermer.feed(animal); // Фермер кормит животрных
+    fermer.eat(animal); // Фермер съедает животного у кторого не осталось ресурсов
 }
 farm.getInfo();
 
