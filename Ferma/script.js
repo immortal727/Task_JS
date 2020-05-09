@@ -22,7 +22,7 @@
             this._resource += otherAnimal._sourceAnimal;
             otherAnimal._health = 0;
         }
-        else console.log(`${otherAnimal._nameAnimal} нельзя съесть`);
+        else console.log(otherAnimal._nameAnimal, "нельзя съесть");
     }
 
     drive_away(otherAnimal) { // Фермер прогоняет другое животное
