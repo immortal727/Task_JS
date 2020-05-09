@@ -9,12 +9,24 @@
 
     collection(otherAnimal) { // Сбор ресурсов с животных
         console.log("Принял", otherAnimal);
-        
-        if (!(otherAnimal instanceof Animals) || otherAnimal._sourceAnimal!=0) {
-
-            this._resource++; // Фермер восполняет свои ресурсы
-            otherAnimal._sourceAnimal--; // Ресурсы животного уменьшаются на 1-ку
+        // Выбираем животных, которые доступны в пищу _edible === true
+        // создаем новый массив
+        let edible = [];
+        for (let elem in otherAnimal) {
+            if ((otherAnimal instanceof Animals)
+                || otherAnimal._sourceAnimal != 0
+                || otherAnimal._edible === true) {
+                edible.push(otherAnimal[elem]);
+               
+            }
+         //   else console.log(`Ресурсов ${otherAnimal._sourceAnimal}`);
         }
+        console.log("Пригодны в пищу", edible);
+
+        // Фермер восполняет ресурсы от рандомно выбранного животного
+        edible[randomInteger(0, edible.length)];
+        this._resource++; // Фермер восполняет свои ресурсы
+        otherAnimal._sourceAnimal--; // Ресурсы животного уменьшаются на 1-ку
     }
 
     eat(otherAnimal) {
@@ -53,14 +65,14 @@
     }
 }
 
-class Animals {
+class Animals { 
     _weight = 30; // вес животного
     _speed = 5; // скорость км/ч
     _health = this._weight; // здоровье (из рассчета 1 кг животного 1 ресурс)
     _edible = true; // съедобно/несъедобно
-    _sourceAnimal = 3; // кол-во ресурсов
-    constructor() {
-       // this._sourceAnimal = resurs; // кол-во ресурсов
+  //  _sourceAnimal = 3; // кол-во ресурсов
+    constructor(resurs) {
+       this._sourceAnimal = resurs; // кол-во ресурсов
     }
 
     set source(sourceAnimalValue) {
@@ -93,23 +105,22 @@ class Animals {
 
 
 class Cow extends Animals { // Корова
-    constructor(resurs) {
-        super(resurs); // кол-во ресурсов
-        this._sourceAnimal = resurs;
+    constructor() {
+        super(7); // кол-во ресурсов
         this._weight = 50;
         this._speed = 2;
     }
 }
 class Rabbit extends Animals { // Кролик
     constructor() {
-        super(); // кол-во ресурсов
+        super(4); // кол-во ресурсов
         this._weight = 5;
         this._speed = 5;
     }
 }
 class Hen extends Animals { // Курица
     constructor() {
-        super(); // кол-во ресурсов
+        super(5); // кол-во ресурсов
         this._weight = 5;
         this._speed = 5;
     }
@@ -117,7 +128,7 @@ class Hen extends Animals { // Курица
 class Cat extends Animals { // Кот
     _edible = false; // Не съедобен
     constructor() {
-        super(); // 0 - количество ресурсов
+        super(0); // 0 - количество ресурсов
         this._weight = 5;
         this._speed = 5;
     }
@@ -227,10 +238,10 @@ function randomInteger(min, max) {
 }
 let fermer = new Fermer("Дмитрий");
 let animal = new Farm(fermer);
-animal.addAnimal(new Cat(3));
-animal.addAnimal(new Rabbit(4));
-animal.addAnimal(new Cow(5));
-animal.addAnimal(new Hen(7));
+animal.addAnimal(new Cat());
+animal.addAnimal(new Rabbit());
+animal.addAnimal(new Cow());
+animal.addAnimal(new Hen());
 let wild = new wildAnimal("Дикое животное");
 wild.addAnimal();
 console.log("Массив диких животных",wild._wildAnimals)
