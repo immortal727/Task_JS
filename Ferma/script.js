@@ -186,9 +186,8 @@ class Farm {
     }
     
     getInfo() {
-        // Если фермер жив 
-        
-       for (let oneAnimal of this._animals) {
+        for (let oneAnimal of this._animals) {
+            // Если фермер жив 
             if (this._fermer._resource > 0) console.log(oneAnimal);
         }
     }
@@ -214,13 +213,11 @@ animal.addAnimal(new Rabbit());
 animal.addAnimal(new Cow());
 animal.addAnimal(new Hen());
 let wild = new wildAnimal("Дикое животное");
-// Создаем диких животных
 wild.addAnimal();
-//console.log("Массив диких животных",wild._wildAnimals)
+console.log("Массив диких животных",wild._wildAnimals)
 let farm = new Farm(fermer, animal);
 for (let i = 0; i < 5; i++) {
     farm.passDay(wild._wildAnimals);
-    wild.attack(animal); // Приходит дикое животное
 }
 farm.getInfo();
 
