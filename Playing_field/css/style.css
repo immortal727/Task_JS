@@ -1,0 +1,77 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+.container {
+    max-width:960px;
+    margin:0 auto;
+}
+.GameField {
+    display: grid;
+    grid-gap: 15px;
+    grid-auto-flow: dense;
+    margin:20px 0;
+}
+    .GameField > div {
+        min-height:50px;
+        text-align:center;
+        box-shadow:2px 3px 3px #ccc;
+        border:1px solid green;
+        border-radius:7px;
+        padding:5px;
+    }
+
+    #field {
+        background: green;
+    }
+
+.button {
+    cursor: pointer;
+    line-height: 37px;
+    padding: 0 30px;
+    display: block;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.28);
+    color: #fff;
+    font-family: 'psb';
+    font-size: 16px;
+    text-decoration: none;
+    position: relative;
+    z-index: 1;
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(100%, #ffb07c), color-stop(0%, #f35364));
+    background-image: -o-linear-gradient(bottom, #ffb07c 0%, #f35364 100%);
+    background-image: -moz-linear-gradient(bottom, #ffb07c 0%, #f35364 100%);
+    background-image: -webkit-linear-gradient(bottom, #ffb07c 0%, #f35364 100%);
+    background-image: -ms-linear-gradient(bottom, #ffb07c 0%, #f35364 100%);
+    background-image: linear-gradient(to top, #ffb07c 0%, #f35364 100%);
+    -pie-background: linear-gradient(to top, #ffb07c 0%, #f35364 100%);
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    border-radius: 5px;
+}
+    .button:hover {
+        background-color: #f8b195;
+        background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0%, #f35364), color-stop(100%, #ffb07c));
+        background-image: -o-linear-gradient(bottom, #f35364 0%, #ffb07c 100%);
+        background-image: -moz-linear-gradient(bottom, #f35364 0%, #ffb07c 100%);
+        background-image: -webkit-linear-gradient(bottom, #f35364 0%, #ffb07c 100%);
+        background-image: -ms-linear-gradient(bottom, #f35364 0%, #ffb07c 100%);
+        background-image: linear-gradient(to top, #f35364 0%, #ffb07c 100%);
+        -pie-background: linear-gradient(to top, #f35364 0%, #ffb07c 100%);
+        -moz-box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.16);
+        -webkit-box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.16);
+        box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.16);
+    }
