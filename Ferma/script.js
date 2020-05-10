@@ -177,7 +177,7 @@ class Bear extends wildAnimal {
 }
 class Fox extends wildAnimal {
     _speed = 5;
-    _weight = 30;
+    _weight = 30;  
 }
 
 class Farm {
@@ -208,6 +208,11 @@ class Farm {
                 this.addAnimal(randomAnimal(this._homeanimal));
             }
         }
+
+        // Сбор ресурсов
+        for (let index of this._animals) {
+        }
+
         fermer.collection(this._animals); // Сбор ресурсов
         fermer.drive_away(wild);// Прогоняет диких животных
         fermer.feed(animal); // Фермер кормит животрных
