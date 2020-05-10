@@ -114,21 +114,23 @@ function showPresent(Object) {
     let clickElem = event.target;
     // получим значение атрибута data-prise
     let present = clickElem.dataset.prise;
-    console.log(present);
-    if (present === "car" || present === "book" || present === "cat") {
-        console.log(Object[present].title);
-        let div = document.createElement('div');
-        let title = document.createElement("h2");
-        title.innerText = Object[present].title;
-        let pic = document.createElement("img");
-        pic.setAttribute("src", Object[present].img);
-        div.append(title, pic);
-        clickElem.append(div);
-    }
+    
     attempt++;
-    if (attempt === 3) {
+    if (attempt >= 3) {
         window.alert("Ваши попытки закончились. Game Over");
-        removeEventListener('click', showPresent.bind(this, Fields))
+        removeEventListener('click', showPresent.bind(this, Fields));
+    }
+    else {
+        if (present === "car" || present === "book" || present === "cat") {
+            console.log(Object[present].title);
+            let div = document.createElement('div');
+            let title = document.createElement("h2");
+            title.innerText = Object[present].title;
+            let pic = document.createElement("img");
+            pic.setAttribute("src", Object[present].img);
+            div.append(title, pic);
+            clickElem.append(div);
+        }
     }
 }
 
