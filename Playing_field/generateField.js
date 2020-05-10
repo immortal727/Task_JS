@@ -21,9 +21,11 @@ let Fields = {
 }
 
 let section = document.querySelector(".GameField");
-const BOTTON_ARR = document.getElementById('btn');
+let attempt = 0; // Счетчик попыток
+const BOTTON_ARR = document.getElementById('btn')
+
 BOTTON_ARR.addEventListener('click', generateField.bind(BOTTON_ARR, Fields));
-section.addEventListener('click', showPresent.bind(Fields));
+section.addEventListener('click', showPresent.bind(this, Fields));
 
 //Создание массива x*x
 let createArray = (n) => {
@@ -113,15 +115,20 @@ function showPresent(Object) {
     // получим значение атрибута data-prise
     let present = clickElem.dataset.prise;
     console.log(present);
-    if (present === "car" || present === "book" || present || "cat") {
-        console.log(Object);
-        return;
+    if (present === "car" || present === "book" || present === "cat") {
+        console.log(Object[present].title);
         let div = document.createElement('div');
         let title = document.createElement("h2");
         title.innerText = Object[present].title;
         let pic = document.createElement("img");
         pic.setAttribute("src", Object[present].img);
         div.append(title, pic);
+        clickElem.append(div);
+    }
+    attempt++;
+    if (attempt === 3) {
+        window.alert("Ваши попытки закончились. Game Over");
+        removeEventListener('click', showPresent.bind(this, Fields))
     }
 }
 
