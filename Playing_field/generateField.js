@@ -21,6 +21,7 @@ let Fields = {
 }
 
 let section = document.querySelector(".GameField");
+let popitka = document.querySelector("#attempt");
 let attempt = 0; // Счетчик попыток
 const BOTTON_ARR = document.getElementById('btn')
 
@@ -131,6 +132,8 @@ function showPresent(Object) {
             div.append(title, pic);
             clickElem.append(div);
         }
+        popitka.innerHTML = "";
+        popitka.append(attempt);
     }
 }
 
