@@ -8,7 +8,7 @@
     }
 
     collection(otherAnimal) { // Сбор ресурсов с животных
-        console.log("Принял", otherAnimal);
+        console.log("Животные ", otherAnimal);
         // Выбираем животных, которые доступны в пищу _edible === true
         // создаем новый массив
         let edible = [];
