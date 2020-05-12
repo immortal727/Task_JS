@@ -9,24 +9,19 @@
 
     collection(otherAnimal) { // Сбор ресурсов с животных
         console.log("Домашние животные ", otherAnimal);
-        // Выбираем животных, которые доступны в пищу _edible === true
-        // создаем новый массив
-        let edible = [];
-        for (let elem in otherAnimal) {
-            if ((otherAnimal instanceof Animals)
-                || otherAnimal._sourceAnimal != 0
-                || otherAnimal._edible === true) {
-                edible.push(otherAnimal[elem]);
-               
-            }
-         //   else console.log(`Ресурсов ${otherAnimal._sourceAnimal}`);
-        }
-        console.log("Пригодны в пищу", edible);
 
-        // Фермер восполняет ресурсы от рандомно выбранного животного
-        edible[randomInteger(0, edible.length)];
-        this._resource++; // Фермер восполняет свои ресурсы
-        otherAnimal._sourceAnimal--; // Ресурсы животного уменьшаются на 1-ку
+       /* edible[randomInteger(0, edible.length)]._sourceAnimal--;
+        this._resource++;*/
+
+        // Выбираем животных, которые доступны в пищу _edible === true
+        for (let elem in otherAnimal) {
+            console.log("Ресуры " + elem._sourceAnimal);
+            if ((elem instanceof Animals) || elem._sourceAnimal != 0
+                || elem._edible === true) {
+                this._resource++; // Фермер восполняет свои ресурсы
+                elem._sourceAnimal--; // Ресурсы животного уменьшаются на 1-ку
+            }
+        }
     }
 
     eat(otherAnimal) {
@@ -87,14 +82,19 @@ class Animals {
 
    
     escape(otherAnimal){ // Животное убежало
-        if (!(otherAnimal instanceof Animals) || otherAnimal._speed < this._speed) {
-            _health--; // Было совершено нападение, а значит отнимаем 1-ку здоровья
-            console.log(`${this._nameAnimal} смогло убежать от дикого животного`)
-        } else if (otherAnimal._power <= 3) {
-            console.log(`${this._nameAnimal} Животное было ранено и убежало`);
-        } else {
-            console.log(`${this._nameAnimal} было убито диким животным`);
-        }
+        if (!(otherAnimal instanceof Animals)) {
+            // Нападают только животные
+            return;
+            if (otherAnimal._speed < this._speed) {
+                this._health--; // Было совершено нападение, а значит отнимаем 1-ку здоровья
+                console.log(`${this._nameAnimal} смогло убежать от дикого животного`)
+            } else if (otherAnimal._power <= 3) {
+                console.log(`${this._nameAnimal} Животное было ранено и убежало`);
+            } else {
+                this._health = 0;
+                console.log(`${this._nameAnimal} было убито диким животным`);
+            }
+        } 
     }
     eat() { // Животное ест
         if (this._health < _health) {
@@ -151,8 +151,7 @@ class wildAnimal extends Animals { // дикое животное
         } else if (this._attack === 1) {
             this._kill = true; // дикое животное убило домашнее
         } else {
-            otherAnimal.escape(otherAnimal) // домашнее животное убежало
-            otherAnimal._health--;
+            otherAnimal.escape(this) // домашнее животное убежало
         }
     }
     addAnimal() {
@@ -209,9 +208,6 @@ class Farm {
             }
         }
 
-        // Сбор ресурсов
-        for (let index of this._animals) {
-        }
 
         fermer.collection(this._animals); // Сбор ресурсов
         fermer.drive_away(wild);// Прогоняет диких животных
