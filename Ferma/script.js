@@ -208,12 +208,11 @@ class Farm {
             }
         }
         // Приходит дикое животное (рандомно)
-        wild._wildAnimals[randomInteger(0, this._homeanimal.length)].attack(this._homeanimal[randomInteger(0, this._homeanimal.length)]);
+        wild[randomInteger(0, this._homeanimal.length)].attack(this._homeanimal[randomInteger(0, this._homeanimal.length)]);
         fermer.collection(this._animals); // Сбор ресурсов
         fermer.drive_away(wild);// Прогоняет диких животных
         fermer.feed(this._animals); // Фермер кормит животрных
         fermer.eat(this._animals); // Фермер съедает животного у кторого не осталось ресурсов
-        
     }
     
     getInfo() {
