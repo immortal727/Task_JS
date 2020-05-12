@@ -8,7 +8,7 @@
     }
 
     collection(otherAnimal) { // Сбор ресурсов с животных
-        console.log("Животные ", otherAnimal);
+        console.log("Домашние животные ", otherAnimal);
         // Выбираем животных, которые доступны в пищу _edible === true
         // создаем новый массив
         let edible = [];
@@ -35,7 +35,7 @@
         } else {
          //   console.log('Животные', otherAnimal);
             for (let i = 0; i < otherAnimal.length; i++) {
-                consol.log(otherAnimal[i]);
+                console.log(otherAnimal[i]);
                 if (otherAnimal._sourceAnimal === 0) {
                     console.log(`Фермер съел ${otherAnimal[i]}`);
                     otherAnimal._health = 0;
@@ -215,8 +215,8 @@ class Farm {
 
         fermer.collection(this._animals); // Сбор ресурсов
         fermer.drive_away(wild);// Прогоняет диких животных
-        fermer.feed(animal); // Фермер кормит животрных
-        fermer.eat(animal); // Фермер съедает животного у кторого не осталось ресурсов
+        fermer.feed(this._animals); // Фермер кормит животрных
+        fermer.eat(this._animals); // Фермер съедает животного у кторого не осталось ресурсов
         
     }
     
@@ -242,18 +242,19 @@ function randomInteger(min, max) {
     return Math.floor(rand);
 }
 let fermer = new Fermer("Дмитрий");
-let animal = new Farm(fermer);
-animal.addAnimal(new Cat());
-animal.addAnimal(new Rabbit());
-animal.addAnimal(new Cow());
-animal.addAnimal(new Hen());
+let farm = new Farm(fermer);
+farm.addAnimal(new Cat());
+farm.addAnimal(new Rabbit());
+farm.addAnimal(new Cow());
+farm.addAnimal(new Hen());
+console.log(farm);
 let wild = new wildAnimal("Дикое животное");
 wild.addAnimal();
 console.log("Массив диких животных",wild._wildAnimals)
-let farm = new Farm(fermer, animal);
+//farm = new Farm(fermer, animal);
 for (let i = 0; i < 1; i++) {
     farm.passDay(wild._wildAnimals);
-    wild.attack(animal); // Приходит дикое животное 
+    wild.attack(farm); // Приходит дикое животное 
     
 }
 farm.getInfo();
