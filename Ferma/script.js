@@ -14,7 +14,7 @@
         this._resource++;*/
 
         // Выбираем животных, которые доступны в пищу _edible === true
-        for (let elem in otherAnimal) {
+        for (let elem of otherAnimal) {
             console.log("Ресуры " + elem._sourceAnimal);
             if ((elem instanceof Animals) || elem._sourceAnimal != 0
                 || elem._edible === true) {
@@ -207,8 +207,8 @@ class Farm {
                 this.addAnimal(randomAnimal(this._homeanimal));
             }
         }
-
-
+        // Приходит дикое животное (рандомно)
+        wild._wildAnimals[randomInteger(0, _homeanimal.length)].attack(farm._homeanimal[randomInteger(0, _homeanimal.length)]);
         fermer.collection(this._animals); // Сбор ресурсов
         fermer.drive_away(wild);// Прогоняет диких животных
         fermer.feed(this._animals); // Фермер кормит животрных
@@ -250,8 +250,6 @@ console.log("Массив диких животных",wild._wildAnimals)
 //farm = new Farm(fermer, animal);
 for (let i = 0; i < 1; i++) {
     farm.passDay(wild._wildAnimals);
-    wild.attack(farm); // Приходит дикое животное 
-    
 }
 farm.getInfo();
 
