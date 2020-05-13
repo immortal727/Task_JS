@@ -11,15 +11,13 @@
         let edible = []; // Массив для животных, которые пригодны в пищу
         // Выбираем животных, которые доступны в пищу _edible === true
         for (let elem in otherAnimal) {
-            if ((otherAnimal[elem] instanceof Animals) && elem._sourceAnimal != 0
-                && elem._edible === true) {
+            if ((otherAnimal[elem] instanceof Animals) && otherAnimal[elem]._sourceAnimal != 0
+                && otherAnimal[elem]._edible === true) {
                 edible.push(otherAnimal[elem]);
             }
         }
         // Убираем ресурсы рандомно с животного, которое пригодно в пищу
-        console.log("Животные, доступны в пищу", edible);
         let givotnoe = edible[randomInteger(0, edible.length)];
-        
         givotnoe._sourceAnimal--;
         console.log("Ресурсы животного", givotnoe, "уменьшились");
         this._resource++; // Фермер восполняет свои ресурсы
@@ -31,13 +29,13 @@
         if (!(otherAnimal instanceof Animals) && otherAnimal._edible === false) {
             throw new Error("Фермер не сможеть съесть другое животное");
         } else {
-         //   console.log('Животные', otherAnimal);
-            for (let i = 0; i < otherAnimal.length; i++) {
-                console.log(otherAnimal[i]);
-                if (otherAnimal._sourceAnimal === 0) {
-                    console.log(`Фермер съел ${otherAnimal[i]}`);
-                    otherAnimal._health = 0;
-                    _resource += otherAnimal._sourceAnimal; // ресурс фермера увеличивается
+            for (let elem in otherAnimal) {
+                if (otherAnimal[elem]._health === 0 && otherAnimal[elem]._edible === true) {
+                    console.log('Фермер съел', otherAnimal[elem]);
+                    otherAnimal[elem]._health = 0; // Уменьшается здоровье
+                    _resource += otherAnimal[elem]._sourceAnimal; // ресурс фермера увеличивается
+                    console.log(otherAnimal[elem], "умерло");
+                    otherAnimal.splice(elem, 1); // Удаляем это животное
                     return;
                 }
             }
@@ -47,11 +45,14 @@
     drive_away(otherAnimal) { // Фермер прогоняет другое животное
         this._resource--; // Затрачивает свои силы (ресурсы) - в любом случае, 
         // прогнал он дикое животное или нет
-        if (!(otherAnimal instanceof Animals) || this._driveAway <= 3 || otherAnimal._attack === 0) {
+        
+        if (!(otherAnimal instanceof Animals) && this._driveAway <= 3 && otherAnimal._attack === 0) {
             this._prognal = true;
-            this._driveAway++;
+            this._driveAway++; // увеличиваем счетчик прогнаных животных
+            console.log("Фермеру прогнал ", otherAnimal);
         } else {
             this._prognal = false;
+            console.log("Фермеру не удалось прогнать ", otherAnimal);
         }
         
     }
@@ -84,8 +85,8 @@ class Animals {
 
     escape(otherAnimal){ // Животное убежало
         if (!(otherAnimal instanceof Animals)) {
-            // Нападают только животные
-            return;
+            // Нападают только дикие животные
+          //  return;
             if (otherAnimal._speed < this._speed) {
                 this._health--; // Было совершено нападение, а значит отнимаем 1-ку здоровья
                 console.log(`${this._nameAnimal} смогло убежать от дикого животного`)
@@ -213,10 +214,11 @@ class Farm {
         }
        
         // Приходит дикое животное (рандомно) и атакует рандомно домашнее животное
-        wild[randomInteger(0, wild.length)].attack(this._animals[randomInteger(0, this._animals.length)]);
+        let wild_ferm = wild[randomInteger(0, wild.length)]; // Животное которое, приходит на ферму
+        wild_ferm.attack(this._animals[randomInteger(0, this._animals.length)]);
 
         fermer.collection(this._animals); // Сбор ресурсов
-        fermer.drive_away(wild);// Прогоняет диких животных
+        fermer.drive_away(wild_ferm);// Прогоняет диких животных
         fermer.feed(this._animals); // Фермер кормит животрных
         fermer.eat(this._animals); // Фермер съедает животного у кторого не осталось ресурсов
     }
