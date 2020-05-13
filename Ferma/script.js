@@ -8,20 +8,23 @@
     }
 
     collection(otherAnimal) { // Сбор ресурсов с животных
-        console.log("Домашние животные ", otherAnimal);
-
-       /* edible[randomInteger(0, edible.length)]._sourceAnimal--;
-        this._resource++;*/
-
+        let edible = []; // Массив для животных, которые пригодны в пищу
         // Выбираем животных, которые доступны в пищу _edible === true
-        for (let elem of otherAnimal) {
-            console.log("Ресуры " + elem._sourceAnimal);
-            if ((elem instanceof Animals) || elem._sourceAnimal != 0
-                || elem._edible === true) {
-                this._resource++; // Фермер восполняет свои ресурсы
-                elem._sourceAnimal--; // Ресурсы животного уменьшаются на 1-ку
+        for (let elem in otherAnimal) {
+            if ((otherAnimal[elem] instanceof Animals) && elem._sourceAnimal != 0
+                && elem._edible === true) {
+                edible.push(otherAnimal[elem]);
             }
         }
+        // Убираем ресурсы рандомно с животного, которое пригодно в пищу
+        console.log("Животные, доступны в пищу", edible);
+        let givotnoe = edible[randomInteger(0, edible.length)];
+        
+        givotnoe._sourceAnimal--;
+        console.log("Ресурсы животного", givotnoe, "уменьшились");
+        this._resource++; // Фермер восполняет свои ресурсы
+        console.log(`Ресурсы фермера ${this._resource}`);
+        
     }
 
     eat(otherAnimal) {
@@ -65,7 +68,6 @@ class Animals {
     _speed = 5; // скорость км/ч
     _health = this._weight; // здоровье (из рассчета 1 кг животного 1 ресурс)
     _edible = true; // съедобно/несъедобно
-  //  _sourceAnimal = 3; // кол-во ресурсов
     constructor(resurs) {
        this._sourceAnimal = resurs; // кол-во ресурсов
     }
@@ -80,7 +82,6 @@ class Animals {
         return this._sourceAnimal;
     }
 
-   
     escape(otherAnimal){ // Животное убежало
         if (!(otherAnimal instanceof Animals)) {
             // Нападают только животные
@@ -144,14 +145,17 @@ class wildAnimal extends Animals { // дикое животное
         super(name);
         this._wildAnimals = [];
         this._wildAnimalArray = [Wolf, Bear, Fox];
+        this._sourceAnimal = 0;
     }
     attack(otherAnimal) {
         if (otherAnimal instanceof wildAnimal) {
             throw new Error("Дикие животные не могут нападать друг на друга");
         } else if (this._attack === 1) {
             this._kill = true; // дикое животное убило домашнее
+            console.log("Дикое животное", this, "убило домашнее животное");
         } else {
             otherAnimal.escape(this) // домашнее животное убежало
+            console.log("Домашнее животное",otherAnimal,"убежало");
         }
     }
     addAnimal() {
@@ -207,8 +211,10 @@ class Farm {
                 this.addAnimal(randomAnimal(this._homeanimal));
             }
         }
-        // Приходит дикое животное (рандомно)
-        wild[randomInteger(0, this._homeanimal.length)].attack(this._homeanimal[randomInteger(0, this._homeanimal.length)]);
+       
+        // Приходит дикое животное (рандомно) и атакует рандомно домашнее животное
+        wild[randomInteger(0, wild.length)].attack(this._animals[randomInteger(0, this._animals.length)]);
+
         fermer.collection(this._animals); // Сбор ресурсов
         fermer.drive_away(wild);// Прогоняет диких животных
         fermer.feed(this._animals); // Фермер кормит животрных
@@ -233,8 +239,7 @@ function randomInteger(min, max) {
     // случайное число от min до (max+1)
     min = Math.ceil(min); // Округление до ближайшего большего целого
     max = Math.floor(max); // Округление до ближайшего меньшего целого
-    let rand = min + Math.random() * (max + 1 - min);
-    return Math.floor(rand);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 let fermer = new Fermer("Дмитрий");
 let farm = new Farm(fermer);
@@ -242,13 +247,13 @@ farm.addAnimal(new Cat());
 farm.addAnimal(new Rabbit());
 farm.addAnimal(new Cow());
 farm.addAnimal(new Hen());
-console.log(farm);
+//console.log(farm);
 let wild = new wildAnimal("Дикое животное");
 wild.addAnimal();
-console.log("Массив диких животных",wild._wildAnimals)
-//farm = new Farm(fermer, animal);
+//console.log("Массив диких животных", wild._wildAnimals);
+
 for (let i = 0; i < 1; i++) {
-    farm.passDay(wild._wildAnimals);
+    farm.passDay(wild._wildAnimals); 
 }
 farm.getInfo();
 
