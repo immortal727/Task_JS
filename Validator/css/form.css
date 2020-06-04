@@ -1,0 +1,47 @@
+label {
+    padding: 5px;
+}
+input[type=text]:placeholder-shown, input[type=text]:placeholder-shown:focus {
+    color: #f44336;
+}
+
+input[type="text"], input[type="email"], input[type="tel"], input[type="number"], input[type="password"], textarea {
+    height: 30px;
+    padding: 0 3px;
+    box-shadow: 1px 1px 3px #777;
+    -webkit-box-shadow: 1px 1px 3px #777;
+    -moz-box-shadow: 1px 1px 3px #777;
+    font-style: italic;
+    border-radius: 7px;
+    -webkit-box-border-radius: 7px;
+    -moz-box-border-radius: 7px;
+    margin-bottom: 10px;
+}
+.form-danger {
+    display: none;
+    background: #edcaca;
+    position: relative;
+    max-width: 200px;
+    box-shadow: 2px 2px 3px #918f8f;
+    padding: 7px;
+    margin-bottom: 10px;
+    left: 25px;
+}
+    .form-danger i {
+        padding: 3px;
+        background-color: #ff6a00;
+        width: 10px;
+        height: 18px;
+        text-align: center;
+        float: left;
+        margin-right: 10px;
+    }
+    .form-danger:before {
+        content: "";
+        position: absolute;
+        top: -30px;
+        left:20px;
+        border: 15px solid transparent;
+        border-bottom: 15px solid #edcaca;
+    }
+

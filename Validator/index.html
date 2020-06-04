@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Валидация формы</title>
+    <meta name="description" content="Валидация" />
+    <link rel="stylesheet" href="css/form.css">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Так как файл validator.js не зависит от html,
+        то такие файлы можно подключать в head -->
+    <script src="validator.js"></script>
+    <script src="https://kit.fontawesome.com/bf410b7fee.js"></script>
+    <link rel="stylesheet" href="https://kit-free.fontawesome.com/releases/latest/css/free.min.css" media="all">
+</head>
+<body>
+    <!-- validator.js - Валидатор -->
+    <!-- index.js - использование валидатора для проверки формы auth-form-->
+    <form name="auth-form">
+        <div>
+            <input data-validate="login" name="login" type="text" placeholder="Ваш логин">
+            <span class="form-danger">
+                <i class="fa fa-exclamation" aria-hidden="true"></i>
+                <div id="error"></div>
+            </span>
+        </div>
+        <div>
+            <input data-validate="password" name="password" type="password" placeholder="Пароль">
+            <span class="form-danger">
+                <i class="fa fa-exclamation" aria-hidden="true"></i>
+                <div id="error"></div>
+            </span>
+        </div>
+        <div>
+            <input data-validate="password2" name="password2" type="password" placeholder="Подтвердите пароль">
+            <span class="form-danger">
+                <i class="fa fa-exclamation" aria-hidden="true"></i>
+                <div id="error"></div>
+            </span>
+        </div>
+        <input type="submit" value="Отправить">
+    </form>
+
+    <script src="index.js"></script>
+</body>
+</html>

@@ -1,8 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Ferma"
+    "\\Ferma",
+    "\\Validator",
+    "\\Validator\\css"
   ],
-  "SelectedNode": "\\Ferma\\script.js",
+  "SelectedNode": "\\Validator\\index.html",
   "PreviewInSolutionExplorer": false
 }

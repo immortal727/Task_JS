@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form id="myform">
+      <div class="input">
+        <label for="inp1">Inp1</label>
+        <input
+          type="text"
+          name="inp1"
+          id="inp1"
+          class="field"
+          data-error="Вы превысили лимит!"
+        />
+        <div class="message"></div>
+      </div>
+      <button>Submit</button>
+      <button type="reset">Reset</button>
+    </form>
+    <script>
+      let v = new Validator({
+        id: 'myform',
+      });
+    </script>
+    <script src="validator.js"></script>
+  </body>
+</html>
