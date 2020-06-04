@@ -17,6 +17,15 @@
           class="field"
           data-error="Вы превысили лимит!"
         />
+        <div class="input">
+          <label for="inp2">Inp2</label>
+          <input
+            type="text"
+            name="inp2"
+            id="inp2"
+            class="field"
+            data-error="Вы превысили лимит!"
+          />
         <div class="message"></div>
       </div>
       <button>Submit</button>
@@ -25,6 +34,16 @@
     <script>
       let v = new Validator({
         id: 'myform',
+        pattern: {
+          tel: /^\+\d{1,3}\(d{3}\)\d{7}$/,
+          addres: /^$/,
+        },
+        methods: {
+          inp1:[
+            [`notEmpty`], 
+            [`contains`, `inp2`],
+            [`pattern`, `email`]],
+        }
       });
     </script>
     <script src="validator.js"></script>
